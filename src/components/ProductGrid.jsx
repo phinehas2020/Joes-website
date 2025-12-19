@@ -40,8 +40,8 @@ const ProductCard = ({ product, index }) => {
                     alt={product.name}
                     className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
                 />
-                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/5 transition-colors duration-500" />
-                <button className="absolute bottom-6 left-1/2 -translate-x-1/2 btn bg-white/90 backdrop-blur-sm border-none translate-y-10 opacity-0 group-hover:translate-y-0 group-hover:opacity-100">
+                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-500 z-10" />
+                <button className="absolute bottom-12 left-1/2 -translate-x-1/2 btn bg-white/95 backdrop-blur-sm border-none translate-y-8 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 z-20 transition-all duration-500 whitespace-nowrap">
                     View Details
                 </button>
             </div>

@@ -7,6 +7,7 @@ const products = [
         name: "The Artisan Oak",
         price: "$2,400",
         image: "/images/product-oak.png",
+        sketch: "/images/sketch-oak.png",
         category: "White Oak"
     },
     {
@@ -14,6 +15,7 @@ const products = [
         name: "Black Walnut Minimal",
         price: "$2,850",
         image: "/images/product-walnut.png",
+        sketch: "/images/sketch-walnut.png",
         category: "Black Walnut"
     },
     {
@@ -21,6 +23,7 @@ const products = [
         name: "Heritage Low Profile",
         price: "$2,100",
         image: "/images/hero.png",
+        sketch: "/images/sketch-hero.png",
         category: "White Oak"
     }
 ];
@@ -34,14 +37,25 @@ const ProductCard = ({ product, index }) => {
             transition={{ delay: index * 0.2, duration: 0.8 }}
             className="group"
         >
-            <div className="relative aspect-[4/5] overflow-hidden bg-white mb-6">
+            <div className="relative aspect-[4/5] overflow-hidden bg-white mb-6 group cursor-crosshair">
+                {/* Original Image */}
                 <img
                     src={product.image}
                     alt={product.name}
                     className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
                 />
-                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-500 z-10" />
-                <button className="absolute bottom-12 left-1/2 -translate-x-1/2 btn bg-white/95 backdrop-blur-sm border-none translate-y-8 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 z-20 transition-all duration-500 whitespace-nowrap">
+
+                {/* Sketch Overlay (X-Ray Effect) */}
+                <motion.img
+                    src={product.sketch}
+                    alt={`${product.name} sketch`}
+                    className="absolute inset-0 w-full h-full object-cover opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none mix-blend-multiply scale-105 group-hover:scale-105"
+                    initial={false}
+                />
+
+                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/5 transition-colors duration-500 z-10" />
+
+                <button className="absolute bottom-16 left-1/2 -translate-x-1/2 btn bg-white/95 backdrop-blur-sm border-none translate-y-8 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 z-20 transition-all duration-500 whitespace-nowrap shadow-xl">
                     View Details
                 </button>
             </div>

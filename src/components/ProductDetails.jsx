@@ -12,7 +12,7 @@ const ProductDetails = ({ addToCart }) => {
     const [isHovering, setIsHovering] = useState(false);
     const containerRef = useRef(null);
 
-    if (!product) return <div className="h-screen flex items-center justify-center font-serif text-2xl">Product not found.</div>;
+    if (!product) return <div className="h-screen flex items-center justify-center font-serif text-2xl text-reveal">Product not found.</div>;
 
     const handleMouseMove = (e) => {
         if (!containerRef.current) return;
@@ -22,28 +22,47 @@ const ProductDetails = ({ addToCart }) => {
         setMousePos({ x, y });
     };
 
-    return (
-        <section className="pt-32 pb-24 bg-primary min-h-screen">
-            <div className="container">
-                <Link to="/" className="inline-flex items-center gap-2 text-sm uppercase tracking-widest mb-12 hover:opacity-50 transition-opacity">
-                    <ArrowLeft size={16} /> Back to Collection
-                </Link>
+    const fadeIn = {
+        hidden: { opacity: 0, y: 20 },
+        visible: (i) => ({
+            opacity: 1,
+            y: 0,
+            transition: { delay: i * 0.1, duration: 0.8, ease: [0.22, 1, 0.36, 1] }
+        })
+    };
 
-                <div className="grid grid-cols-1 lg:grid-cols-12 gap-16">
+    return (
+        <section className="pt-40 pb-32 bg-primary min-h-screen">
+            <div className="container">
+                <motion.div
+                    initial={{ opacity: 0, x: -10 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.8 }}
+                >
+                    <Link to="/" className="inline-flex items-center gap-3 text-[10px] uppercase tracking-[0.3em] font-bold mb-16 hover:text-accent transition-colors group">
+                        <ArrowLeft size={14} className="group-hover:-translate-x-1 transition-transform" /> Back to Collection
+                    </Link>
+                </motion.div>
+
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-20">
                     {/* Image Gallery */}
-                    <div className="lg:col-span-7 space-y-8">
-                        <div
+                    <div className="lg:col-span-7 space-y-10">
+                        <motion.div
+                            initial={{ opacity: 0, scale: 0.98 }}
+                            animate={{ opacity: 1, scale: 1 }}
+                            transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
                             ref={containerRef}
                             onMouseMove={handleMouseMove}
                             onMouseEnter={() => setIsHovering(true)}
                             onMouseLeave={() => setIsHovering(false)}
-                            className="relative aspect-[4/5] bg-white overflow-hidden cursor-none"
+                            className="relative aspect-[4/5] bg-white overflow-hidden cursor-none shadow-2xl"
                         >
                             {/* Main Image */}
                             <img
                                 src={product.gallery[activeImg]}
                                 alt={product.name}
-                                className="w-full h-full object-cover"
+                                className="w-full h-full object-cover transition-transform duration-1000"
+                                style={{ transform: isHovering ? 'scale(1.02)' : 'scale(1)' }}
                             />
 
                             {/* X-Ray Sketch Layer (Only for primary image) */}
@@ -56,77 +75,97 @@ const ProductDetails = ({ addToCart }) => {
                                             backgroundImage: `url(${product.sketch})`,
                                             backgroundSize: 'cover',
                                             backgroundPosition: 'center',
-                                            maskImage: `radial-gradient(circle 120px at ${mousePos.x}% ${mousePos.y}%, black 0%, black 70%, transparent 100%)`,
-                                            WebkitMaskImage: `radial-gradient(circle 120px at ${mousePos.x}% ${mousePos.y}%, black 0%, black 70%, transparent 100%)`
+                                            maskImage: `radial-gradient(circle 140px at ${mousePos.x}% ${mousePos.y}%, black 0%, black 70%, transparent 100%)`,
+                                            WebkitMaskImage: `radial-gradient(circle 140px at ${mousePos.x}% ${mousePos.y}%, black 0%, black 70%, transparent 100%)`
                                         }}
-                                    />
-
-                                    {/* Custom Flashlight Position Tracker (Transparent) */}
-                                    <motion.div
-                                        animate={{ x: `${mousePos.x}%`, y: `${mousePos.y}%` }}
-                                        transition={{ type: 'spring', damping: 35, stiffness: 250, restDelta: 0.001 }}
-                                        className="absolute top-0 left-0 w-[1px] h-[1px] pointer-events-none z-20"
                                     />
                                 </>
                             )}
-                        </div>
+                        </motion.div>
 
-                        <div className="grid grid-cols-4 gap-4">
+                        <div className="grid grid-cols-4 gap-6">
                             {product.gallery.map((img, i) => (
-                                <button
+                                <motion.button
+                                    initial={{ opacity: 0, y: 10 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    transition={{ delay: 0.4 + (i * 0.1) }}
                                     key={i}
                                     onClick={() => setActiveImg(i)}
-                                    className={`aspect-square overflow-hidden border-2 transition-all ${activeImg === i ? 'border-accent' : 'border-transparent'}`}
+                                    className={`aspect-square overflow-hidden border-2 transition-all duration-500 ${activeImg === i ? 'border-accent shadow-lg scale-105' : 'border-transparent opacity-60 hover:opacity-100'}`}
                                 >
                                     <img src={img} alt="" className="w-full h-full object-cover" />
-                                </button>
+                                </motion.button>
                             ))}
                         </div>
                     </div>
 
                     {/* Product Details Info */}
                     <div className="lg:col-span-5 flex flex-col pt-4">
-                        <div className="mb-8">
-                            <span className="text-[10px] uppercase tracking-[0.4em] text-secondary mb-4 block">{product.category}</span>
-                            <h1 className="text-5xl md:text-6xl font-serif mb-4">{product.name}</h1>
-                            <p className="text-2xl font-light text-accent">{product.price}</p>
+                        <div className="mb-12">
+                            <motion.span
+                                custom={1} variants={fadeIn} initial="hidden" animate="visible"
+                                className="text-[10px] uppercase tracking-[0.5em] text-accent mb-6 block font-bold"
+                            >
+                                {product.category}
+                            </motion.span>
+                            <motion.h1
+                                custom={2} variants={fadeIn} initial="hidden" animate="visible"
+                                className="text-6xl md:text-7xl font-serif mb-6 tracking-tight"
+                            >
+                                {product.name}
+                            </motion.h1>
+                            <motion.p
+                                custom={3} variants={fadeIn} initial="hidden" animate="visible"
+                                className="text-3xl font-light text-secondary/80"
+                            >
+                                {product.price}
+                            </motion.p>
                         </div>
 
-                        <div className="mb-12">
-                            <p className="text-secondary leading-relaxed mb-8 text-lg">
+                        <div className="mb-16">
+                            <motion.p
+                                custom={4} variants={fadeIn} initial="hidden" animate="visible"
+                                className="text-secondary/70 leading-relaxed mb-10 text-xl font-light"
+                            >
                                 {product.description}
-                            </p>
+                            </motion.p>
 
-                            <div className="space-y-4">
-                                <h4 className="flex items-center gap-2 text-[10px] uppercase tracking-[0.3em] font-semibold">
-                                    <Info size={14} /> Key Features
+                            <motion.div
+                                custom={5} variants={fadeIn} initial="hidden" animate="visible"
+                                className="space-y-6"
+                            >
+                                <h4 className="flex items-center gap-3 text-[10px] uppercase tracking-[0.4em] font-black opacity-40">
+                                    <Info size={12} /> Details & Materials
                                 </h4>
-                                <ul className="grid grid-cols-1 md:grid-cols-2 gap-y-2 text-sm text-secondary">
+                                <ul className="grid grid-cols-1 gap-y-3 text-sm text-secondary/80">
                                     {product.features.map((f, i) => (
-                                        <li key={i} className="flex items-center gap-2">
-                                            <div className="w-1 h-1 bg-accent rounded-full" /> {f}
+                                        <li key={i} className="flex items-center gap-3">
+                                            <div className="w-1.5 h-1.5 border border-accent rounded-full" /> {f}
                                         </li>
                                     ))}
                                 </ul>
-                            </div>
+                            </motion.div>
                         </div>
 
-                        <div className="flex flex-col gap-6 mt-auto">
+                        <motion.div
+                            custom={6} variants={fadeIn} initial="hidden" animate="visible"
+                            className="flex flex-col gap-8 mt-auto"
+                        >
                             <div className="flex gap-4">
                                 <button
                                     onClick={addToCart}
-                                    className="btn-primary w-full py-5 text-sm uppercase tracking-[0.2em] font-bold"
+                                    className="btn-primary flex-1 py-6 text-[11px] uppercase tracking-[0.3em] font-black"
                                 >
-                                    Add to Cart
+                                    Add to Collection
                                 </button>
-                                <button className="btn px-6 border-gray-200">
-                                    <Share2 size={20} />
+                                <button className="btn px-8 border-black/5 hover:border-black/20">
+                                    <Share2 size={18} />
                                 </button>
                             </div>
-                            <p className="text-[10px] uppercase tracking-[0.2em] text-secondary text-center">
-                                Free shipping on all US orders over $1,500. Handcrafted to order.
+                            <p className="text-[9px] uppercase tracking-[0.3em] text-secondary/40 text-center font-bold">
+                                Hand-rubbed finish • Sustainably harvested • Life-time warranty
                             </p>
-                        </div>
+                        </motion.div>
                     </div>
                 </div>
             </div>

@@ -1,0 +1,104 @@
+import React from 'react';
+import { motion } from 'framer-motion';
+
+const products = [
+    {
+        id: 1,
+        name: "The Artisan Oak",
+        price: "$2,400",
+        image: "/images/product-oak.png",
+        category: "White Oak"
+    },
+    {
+        id: 2,
+        name: "Black Walnut Minimal",
+        price: "$2,850",
+        image: "/images/product-walnut.png",
+        category: "Black Walnut"
+    },
+    {
+        id: 3,
+        name: "Heritage Low Profile",
+        price: "$2,100",
+        image: "/images/hero.png",
+        category: "White Oak"
+    }
+];
+
+const ProductCard = ({ product, index }) => {
+    return (
+        <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: index * 0.2, duration: 0.8 }}
+            className="group"
+        >
+            <div className="relative aspect-[4/5] overflow-hidden bg-white mb-6">
+                <img
+                    src={product.image}
+                    alt={product.name}
+                    className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
+                />
+                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/5 transition-colors duration-500" />
+                <button className="absolute bottom-6 left-1/2 -translate-x-1/2 btn bg-white/90 backdrop-blur-sm border-none translate-y-10 opacity-0 group-hover:translate-y-0 group-hover:opacity-100">
+                    View Details
+                </button>
+            </div>
+            <div className="flex justify-between items-start">
+                <div>
+                    <p className="text-[10px] uppercase tracking-[0.2em] text-secondary mb-1">{product.category}</p>
+                    <h3 className="text-xl">{product.name}</h3>
+                </div>
+                <p className="font-sans text-sm font-medium">{product.price}</p>
+            </div>
+        </motion.div>
+    );
+};
+
+const ProductGrid = () => {
+    return (
+        <section id="collections" className="section-padding bg-white">
+            <div className="container">
+                <div className="flex flex-col md:flex-row justify-between items-end mb-20 gap-8">
+                    <div className="max-w-xl">
+                        <motion.span
+                            initial={{ opacity: 0 }}
+                            whileInView={{ opacity: 1 }}
+                            viewport={{ once: true }}
+                            className="text-[10px] uppercase tracking-[0.4em] text-secondary block mb-4"
+                        >
+                            The 2024 Collection
+                        </motion.span>
+                        <motion.h2
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            className="text-4xl md:text-6xl"
+                        >
+                            Timeless designs, <br />
+                            <span className="italic font-light">built for generations.</span>
+                        </motion.h2>
+                    </div>
+                    <motion.div
+                        initial={{ opacity: 0 }}
+                        whileInView={{ opacity: 1 }}
+                        viewport={{ once: true }}
+                    >
+                        <a href="#" className="text-sm uppercase tracking-widest border-b border-text-primary pb-1 hover:opacity-50">
+                            View All Products
+                        </a>
+                    </motion.div>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-12 gap-y-20">
+                    {products.map((product, index) => (
+                        <ProductCard key={product.id} product={product} index={index} />
+                    ))}
+                </div>
+            </div>
+        </section>
+    );
+};
+
+export default ProductGrid;

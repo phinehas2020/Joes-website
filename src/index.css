@@ -1,0 +1,114 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Inter:wght@300;400;500&display=swap');
+
+:root {
+  --bg-primary: #FAF9F6;
+  --text-primary: #1A1A1A;
+  --text-secondary: #4A4A4A;
+  --accent: #D4A373;
+  --accent-light: #E9D8A6;
+  --white: #FFFFFF;
+  --font-serif: 'Cormorant Garamond', serif;
+  --font-sans: 'Inter', sans-serif;
+  --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+::selection {
+  background-color: var(--accent);
+  color: var(--white);
+}
+
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  line-height: 1.6;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-serif);
+  font-weight: 600;
+  line-height: 1.1;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+  transition: var(--transition);
+}
+
+ul {
+  list-style: none;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+/* Custom Utilities */
+.text-reveal {
+  overflow: hidden;
+}
+
+.section-padding {
+  padding: 10rem 0;
+}
+
+@media (max-width: 768px) {
+  .section-padding {
+    padding: 5rem 0;
+  }
+}
+
+.btn {
+  display: inline-block;
+  padding: 1rem 2.5rem;
+  border: 1px solid var(--text-primary);
+  background: transparent;
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1rem;
+  cursor: pointer;
+  transition: var(--transition);
+  position: relative;
+  overflow: hidden;
+}
+
+.btn:hover {
+  background: var(--text-primary);
+  color: var(--white);
+}
+
+.btn-primary {
+  background: var(--text-primary);
+  color: var(--white);
+}
+
+.btn-primary:hover {
+  background: transparent;
+  color: var(--text-primary);
+}

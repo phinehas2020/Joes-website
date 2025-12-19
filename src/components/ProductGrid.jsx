@@ -42,20 +42,20 @@ const ProductCard = ({ product, index }) => {
                 <img
                     src={product.image}
                     alt={product.name}
-                    className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
+                    className="w-full h-full object-cover transition-all duration-700 group-hover:scale-105 group-hover:opacity-0"
                 />
 
-                {/* Sketch Overlay (X-Ray Effect) */}
+                {/* Sketch Overlay (Full Fade Replacement) */}
                 <motion.img
                     src={product.sketch}
                     alt={`${product.name} sketch`}
-                    className="absolute inset-0 w-full h-full object-cover opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none mix-blend-multiply scale-105 group-hover:scale-105"
+                    className="absolute inset-0 w-full h-full object-cover opacity-0 group-hover:opacity-100 transition-all duration-700 pointer-events-none scale-105"
                     initial={false}
                 />
 
                 <div className="absolute inset-0 bg-black/0 group-hover:bg-black/5 transition-colors duration-500 z-10" />
 
-                <button className="absolute bottom-16 left-1/2 -translate-x-1/2 btn bg-white/95 backdrop-blur-sm border-none translate-y-8 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 z-20 transition-all duration-500 whitespace-nowrap shadow-xl">
+                <button className="absolute bottom-20 left-1/2 -translate-x-1/2 btn bg-white/95 backdrop-blur-sm border-none translate-y-8 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 z-20 transition-all duration-500 whitespace-nowrap shadow-xl">
                     View Details
                 </button>
             </div>

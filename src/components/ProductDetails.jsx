@@ -46,28 +46,32 @@ const ProductDetails = ({ addToCart }) => {
                                 className="w-full h-full object-cover"
                             />
 
-                            {/* X-Ray Sketch Layer */}
-                            <div
-                                className="absolute inset-0 pointer-events-none transition-opacity duration-300"
-                                style={{
-                                    opacity: isHovering ? 1 : 0,
-                                    backgroundImage: `url(${product.sketch})`,
-                                    backgroundSize: 'cover',
-                                    backgroundPosition: 'center',
-                                    maskImage: `radial-gradient(circle 120px at ${mousePos.x}% ${mousePos.y}%, black 0%, black 70%, transparent 100%)`,
-                                    WebkitMaskImage: `radial-gradient(circle 120px at ${mousePos.x}% ${mousePos.y}%, black 0%, black 70%, transparent 100%)`
-                                }}
-                            />
+                            {/* X-Ray Sketch Layer (Only for primary image) */}
+                            {activeImg === 0 && (
+                                <>
+                                    <div
+                                        className="absolute inset-0 pointer-events-none transition-opacity duration-300"
+                                        style={{
+                                            opacity: isHovering ? 1 : 0,
+                                            backgroundImage: `url(${product.sketch})`,
+                                            backgroundSize: 'cover',
+                                            backgroundPosition: 'center',
+                                            maskImage: `radial-gradient(circle 120px at ${mousePos.x}% ${mousePos.y}%, black 0%, black 70%, transparent 100%)`,
+                                            WebkitMaskImage: `radial-gradient(circle 120px at ${mousePos.x}% ${mousePos.y}%, black 0%, black 70%, transparent 100%)`
+                                        }}
+                                    />
 
-                            {/* Custom Flashlight Cursor Ring */}
-                            <motion.div
-                                animate={{ x: `${mousePos.x}%`, y: `${mousePos.y}%` }}
-                                transition={{ type: 'spring', damping: 35, stiffness: 250, restDelta: 0.001 }}
-                                className="absolute top-0 left-0 w-[240px] h-[240px] -ml-[120px] -mt-[120px] border border-white/40 rounded-full pointer-events-none z-20 flex items-center justify-center bg-white/5 shadow-[0_0_50px_rgba(255,255,255,0.1)]"
-                                style={{ opacity: isHovering ? 1 : 0 }}
-                            >
-                                <div className="text-[9px] uppercase tracking-[0.3em] text-white font-medium bg-black/40 backdrop-blur-md px-3 py-1 rounded-full border border-white/10 uppercase tracking-[0.3em]">X-Ray</div>
-                            </motion.div>
+                                    {/* Custom Flashlight Cursor Ring */}
+                                    <motion.div
+                                        animate={{ x: `${mousePos.x}%`, y: `${mousePos.y}%` }}
+                                        transition={{ type: 'spring', damping: 35, stiffness: 250, restDelta: 0.001 }}
+                                        className="absolute top-0 left-0 w-[240px] h-[240px] -ml-[120px] -mt-[120px] border border-white/40 rounded-full pointer-events-none z-20 flex items-center justify-center bg-white/5 shadow-[0_0_50px_rgba(255,255,255,0.1)]"
+                                        style={{ opacity: isHovering ? 1 : 0 }}
+                                    >
+                                        <div className="text-[9px] uppercase tracking-[0.3em] text-white font-medium bg-black/40 backdrop-blur-md px-3 py-1 rounded-full border border-white/10 uppercase tracking-[0.3em]">X-Ray</div>
+                                    </motion.div>
+                                </>
+                            )}
                         </div>
 
                         <div className="grid grid-cols-4 gap-4">

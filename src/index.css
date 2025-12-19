@@ -102,8 +102,17 @@ img {
 }
 
 .btn-primary {
+  display: inline-block;
+  padding: 1rem 2.5rem;
   background: var(--text-primary);
   color: var(--white);
+  font-family: var(--font-sans);
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1rem;
+  cursor: pointer;
+  transition: var(--transition);
+  border: 1px solid var(--text-primary);
 }
 
 .btn-primary:hover {

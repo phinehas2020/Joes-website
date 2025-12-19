@@ -55,5 +55,62 @@ export const products = [
             "/images/hero.png",
             "/images/process.png"
         ]
+    },
+    {
+        id: 'nordic-ash',
+        name: "Nordic Ash",
+        price: "$2,250",
+        image: "/images/product-ash.png",
+        sketch: "/images/sketch-ash.png",
+        category: "Ash Wood",
+        description: "The Nordic Ash table is a celebration of light and space. Crafted from sustainable European Ash, its pale, almost ethereal appearance is grounded by a heavy, solid-slab construction. This table is designed for bright, airy interiors that value purity and silence.",
+        features: [
+            "Sustainable European Ash",
+            "Hidden Dowel Joinery",
+            "Soap-washed Matte Finish",
+            "Lightweight Visual Profile"
+        ],
+        gallery: [
+            "/images/product-ash.png",
+            "/images/product-ash-detail.png"
+        ]
+    },
+    {
+        id: 'reclaimed-teak',
+        name: "Reclaimed Teak",
+        price: "$3,100",
+        image: "/images/product-teak.png",
+        sketch: "/images/sketch-teak.png",
+        category: "Reclaimed Wood",
+        description: "A piece of history for your home. Our Reclaimed Teak tables are salvaged from historic structural timbers, preserving the scars and character of their previous life. Each table is entirely unique, with a rich patina that only a century of aging can produce.",
+        features: [
+            "100% Reclaimed Teak",
+            "Salvaged Post & Beam Timber",
+            "Deep Organic Patina",
+            "Limited Heritage Series"
+        ],
+        gallery: [
+            "/images/product-teak.png",
+            "/images/product-teak-detail.png"
+        ]
+    },
+    {
+        id: 'smoked-cherry',
+        name: "Smoked Cherry",
+        price: "$2,600",
+        image: "/images/product-cherry.png",
+        sketch: "/images/sketch-cherry.png",
+        category: "Cherry Wood",
+        description: "Warmth meets modern geometry. The Smoked Cherry table features a deep, amber-hued wood that naturally darkens and gains character over time. With its elegant tapered legs and recessed apron, it strike a perfect balance between mid-century grace and modern minimalism.",
+        features: [
+            "Solid American Cherry",
+            "Tapered Leg System",
+            "UV-Protective Oil Finish",
+            "Precision Mitred Edges"
+        ],
+        gallery: [
+            "/images/product-cherry.png",
+            "/images/product-cherry-detail.png"
+        ]
     }
 ];

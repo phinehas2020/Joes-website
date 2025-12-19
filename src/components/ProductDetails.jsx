@@ -61,15 +61,12 @@ const ProductDetails = ({ addToCart }) => {
                                         }}
                                     />
 
-                                    {/* Custom Flashlight Cursor Ring */}
+                                    {/* Custom Flashlight Position Tracker (Transparent) */}
                                     <motion.div
                                         animate={{ x: `${mousePos.x}%`, y: `${mousePos.y}%` }}
                                         transition={{ type: 'spring', damping: 35, stiffness: 250, restDelta: 0.001 }}
-                                        className="absolute top-0 left-0 w-[240px] h-[240px] -ml-[120px] -mt-[120px] border border-white/40 rounded-full pointer-events-none z-20 flex items-center justify-center bg-white/5 shadow-[0_0_50px_rgba(255,255,255,0.1)]"
-                                        style={{ opacity: isHovering ? 1 : 0 }}
-                                    >
-                                        <div className="text-[9px] uppercase tracking-[0.3em] text-white font-medium bg-black/40 backdrop-blur-md px-3 py-1 rounded-full border border-white/10 uppercase tracking-[0.3em]">X-Ray</div>
-                                    </motion.div>
+                                        className="absolute top-0 left-0 w-[1px] h-[1px] pointer-events-none z-20"
+                                    />
                                 </>
                             )}
                         </div>

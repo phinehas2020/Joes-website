@@ -15,7 +15,7 @@ const Navbar = () => {
   }, []);
 
   return (
-    <nav className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 ${isScrolled ? 'bg-white/80 backdrop-blur-md py-4 shadow-sm' : 'bg-transparent py-8'}`}>
+    <nav className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 ${isScrolled ? 'bg-white/80 backdrop-blur-md py-4 border-b border-gray-100 shadow-sm' : 'bg-transparent py-8 border-b border-transparent'}`}>
       <div className="container flex justify-between items-center">
         <div className="hidden md:flex gap-8 text-sm uppercase tracking-widest font-medium">
           <a href="#collections" className="hover:opacity-50">Collections</a>
@@ -33,7 +33,7 @@ const Navbar = () => {
           <button className="hover:opacity-50 transition-opacity relative">
             <ShoppingBag size={20} />
           </button>
-          <button 
+          <button
             className="md:hidden hover:opacity-50 transition-opacity"
             onClick={() => setMobileMenuOpen(true)}
           >
@@ -45,7 +45,7 @@ const Navbar = () => {
       {/* Mobile Menu Overlay */}
       <AnimatePresence>
         {mobileMenuOpen && (
-          <motion.div 
+          <motion.div
             initial={{ x: '100%' }}
             animate={{ x: 0 }}
             exit={{ x: '100%' }}
@@ -58,7 +58,7 @@ const Navbar = () => {
                 <X size={24} />
               </button>
             </div>
-            
+
             <div className="flex flex-col gap-8 text-4xl font-serif">
               <a href="#collections" onClick={() => setMobileMenuOpen(false)}>Collections</a>
               <a href="#about" onClick={() => setMobileMenuOpen(false)}>Our Story</a>

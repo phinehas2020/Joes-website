@@ -69,14 +69,14 @@ const Hero = () => {
                     animate="visible"
                     className="text-7xl md:text-9xl lg:text-[12rem] mb-12 leading-[0.85] tracking-tighter"
                 >
-                    <div className="flex justify-center overflow-hidden pb-4">
+                    <div className="flex justify-center overflow-hidden pb-8">
                         {titleWords.map((char, i) => (
                             <motion.span key={i} variants={charVariants} className="inline-block">
                                 {char}
                             </motion.span>
                         ))}
                     </div>
-                    <div className="flex justify-center overflow-hidden italic font-light text-white/80">
+                    <div className="flex justify-center overflow-hidden pb-8 italic font-light text-white/80">
                         {subtitleWords.map((char, i) => (
                             <motion.span key={i} variants={charVariants} className="inline-block">
                                 {char}

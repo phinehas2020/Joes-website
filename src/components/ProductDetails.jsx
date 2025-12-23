@@ -10,6 +10,7 @@ const ProductDetails = ({ addToCart }) => {
     const [activeImg, setActiveImg] = useState(0);
     const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
     const [isHovering, setIsHovering] = useState(false);
+    const [isLampOn, setIsLampOn] = useState(false);
     const containerRef = useRef(null);
 
     if (!product) return <div className="h-screen flex items-center justify-center font-serif text-2xl text-reveal">Product not found.</div>;
@@ -59,14 +60,52 @@ const ProductDetails = ({ addToCart }) => {
                         >
                             {/* Main Image */}
                             <img
-                                src={product.gallery[activeImg]}
+                                src={(product.imageOn && activeImg === 0 && isLampOn) ? product.imageOn : product.gallery[activeImg]}
                                 alt={product.name}
                                 className="w-full h-full object-cover transition-transform duration-1000"
                                 style={{ transform: isHovering ? 'scale(1.02)' : 'scale(1)' }}
                             />
 
-                            {/* X-Ray Sketch Layer (Only for primary image) */}
-                            {activeImg === 0 && (
+                            {/* Light Switch for Lamp Product (Only on primary image) */}
+                            {product.imageOn && activeImg === 0 && (
+                                <button
+                                    onClick={() => setIsLampOn(!isLampOn)}
+                                    className="absolute top-8 right-8 z-30 group"
+                                    aria-label="Toggle Light"
+                                >
+                                    <div className={`w-16 h-28 rounded-2xl border border-white/20 backdrop-blur-md shadow-2xl flex flex-col justify-between p-2 transition-colors duration-500 ${isLampOn ? 'bg-black/10' : 'bg-white/10'}`}>
+                                        <div className="absolute inset-0 bg-gradient-to-br from-white/40 to-transparent opacity-50 rounded-2xl pointer-events-none" />
+
+                                        {/* Screw heads */}
+                                        <div className="w-full flex justify-between px-1 opacity-40">
+                                            <div className="w-1.5 h-1.5 rounded-full bg-black/50" />
+                                            <div className="w-1.5 h-1.5 rounded-full bg-black/50" />
+                                        </div>
+
+                                        {/* The Switch Itself */}
+                                        <div className="relative w-full h-full flex items-center justify-center my-2">
+                                            <div className={`w-8 h-14 bg-[#f0f0f0] rounded shadow-[0_4px_6px_rgba(0,0,0,0.3),inset_0_-2px_4px_rgba(0,0,0,0.1)] transition-transform duration-200 relative overflow-hidden ${isLampOn ? 'bg-gradient-to-b from-[#e0e0e0] to-white' : 'bg-gradient-to-t from-[#e0e0e0] to-white'}`}>
+                                                {/* Toggle Rocker Animation */}
+                                                <motion.div
+                                                    animate={{ rotateX: isLampOn ? 25 : -25 }}
+                                                    className="w-full h-full bg-[#f8f8f8] shadow-inner"
+                                                />
+                                            </div>
+                                        </div>
+
+                                        <div className="w-full flex justify-between px-1 opacity-40">
+                                            <div className="w-1.5 h-1.5 rounded-full bg-black/50" />
+                                            <div className="w-1.5 h-1.5 rounded-full bg-black/50" />
+                                        </div>
+                                    </div>
+                                    <span className="absolute -bottom-6 left-1/2 -translate-x-1/2 text-[9px] uppercase tracking-widest font-bold opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-black text-white px-2 py-1 rounded">
+                                        {isLampOn ? 'Off' : 'On'}
+                                    </span>
+                                </button>
+                            )}
+
+                            {/* X-Ray Sketch Layer (Only for primary image and if sketch exists) */}
+                            {activeImg === 0 && product.sketch && (
                                 <>
                                     <div
                                         className="absolute inset-0 pointer-events-none transition-opacity duration-300"

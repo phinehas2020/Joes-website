@@ -112,5 +112,25 @@ export const products = [
             "/images/product-cherry.png",
             "/images/product-cherry-detail.png"
         ]
+    },
+    {
+        id: 'luminous-lamp',
+        name: "Atmosphere One",
+        price: "$850",
+        image: "/images/lamp-off.png",
+        imageOn: "/images/lamp-on.png", // Special property for the toggle
+        sketch: null, // No sketch for this one using the specific new logic
+        category: "Lighting",
+        description: "A study in duality. The Atmosphere One isn't just a lamp; it's a mood architect. With a hand-spun matte blackened steel base and a textured linen float shade, it stands as a sculptural object during the day. At night, it transforms your space with a calibrated warm glow.",
+        features: [
+            "Matte Blackened Steel Base",
+            "Textured Belgian Linen Shade",
+            "Dual-Tone Light Interaction",
+            "Fabric-Wrapped Cord"
+        ],
+        gallery: [
+            "/images/lamp-off.png",
+            "/images/lamp-on.png"
+        ]
     }
 ];

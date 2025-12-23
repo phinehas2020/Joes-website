@@ -57,15 +57,17 @@ const ProductCard = ({ product, index }) => {
                         className="w-full h-full object-cover transition-all duration-700 group-hover:scale-110 group-hover:opacity-0"
                     />
 
-                    {/* Sketch Overlay (Full Fade Replacement) */}
-                    <motion.img
-                        src={product.sketch}
-                        alt={`${product.name} sketch`}
-                        style={{
-                            transform: "translateZ(75px)",
-                        }}
-                        className="absolute inset-0 w-full h-full object-cover opacity-0 group-hover:opacity-100 transition-all duration-700 pointer-events-none scale-110"
-                    />
+                    {/* Overlay Image (Sketch or On State) */}
+                    {(product.sketch || product.imageOn) && (
+                        <motion.img
+                            src={product.sketch || product.imageOn}
+                            alt={`${product.name} alternate view`}
+                            style={{
+                                transform: "translateZ(75px)",
+                            }}
+                            className="absolute inset-0 w-full h-full object-cover opacity-0 group-hover:opacity-100 transition-all duration-700 pointer-events-none scale-110"
+                        />
+                    )}
 
                     <div className="absolute inset-0 bg-black/0 group-hover:bg-black/5 transition-colors duration-500 z-10" />
 

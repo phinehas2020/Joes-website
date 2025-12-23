@@ -88,8 +88,8 @@ const ProductDetails = ({ addToCart }) => {
                         }}
                         className="absolute z-0 pointer-events-none bg-[#FFFAF0]" // Warmer, yellowish light
                         style={{
-                            top: '50%',
-                            left: '20%',
+                            top: '40%', // Moved up to align with shade
+                            left: '28%', // Moved right to center on lamp
                             width: '10vh',
                             height: '10vh',
                             borderRadius: '50%',

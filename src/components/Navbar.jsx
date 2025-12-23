@@ -2,10 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Search, ShoppingBag, Menu, X } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { useTheme } from '../context/ThemeContext';
 
 const Navbar = ({ cartCount, onOpenCart }) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const { textColor, logoColor } = useTheme();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -18,16 +20,16 @@ const Navbar = ({ cartCount, onOpenCart }) => {
   return (
     <nav className={`fixed top-0 left-0 w-full z-50 transition-all duration-700 ${isScrolled ? 'glass-nav py-4' : 'bg-transparent py-8'}`}>
       <div className="container flex justify-between items-center">
-        <div className="hidden md:flex gap-10 text-[10px] uppercase tracking-[0.3em] font-bold">
+        <div className={`hidden md:flex gap-10 text-[10px] uppercase tracking-[0.3em] font-bold ${isScrolled ? 'text-black' : textColor}`}>
           <Link to="/#collections" className="hover:text-accent transition-colors">Collections</Link>
           <Link to="/#about" className="hover:text-accent transition-colors">Our Story</Link>
         </div>
 
-        <Link to="/" className="absolute left-1/2 -translate-x-1/2 text-3xl md:text-4xl font-serif font-bold tracking-tight">
+        <Link to="/" className={`absolute left-1/2 -translate-x-1/2 text-3xl md:text-4xl font-serif font-bold tracking-tight ${isScrolled ? 'text-black' : logoColor}`}>
           JOE'S
         </Link>
 
-        <div className="flex items-center gap-8">
+        <div className={`flex items-center gap-8 ${isScrolled ? 'text-black' : textColor}`}>
           <button className="hidden md:block hover:text-accent transition-colors">
             <Search size={18} strokeWidth={2.5} />
           </button>
@@ -50,7 +52,7 @@ const Navbar = ({ cartCount, onOpenCart }) => {
             className="md:hidden"
             onClick={() => setMobileMenuOpen(true)}
           >
-            <Menu size={24} />
+            <Menu size={24} className={`${isScrolled ? 'text-black' : textColor}`} />
           </button>
         </div>
       </div>

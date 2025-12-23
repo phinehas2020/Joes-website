@@ -4,10 +4,12 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { products } from '../data/products';
 import { ArrowLeft, Plus, Minus, Share2, Info } from 'lucide-react';
 import { playClickSound } from '../utils/sound';
+import { useTheme } from '../context/ThemeContext';
 
 const ProductDetails = ({ addToCart }) => {
     const { id } = useParams();
     const product = products.find(p => p.id === id);
+    const { setTextColor, setLogoColor } = useTheme();
     const [activeImg, setActiveImg] = useState(0);
     const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
     const [isHovering, setIsHovering] = useState(false);
@@ -24,6 +26,29 @@ const ProductDetails = ({ addToCart }) => {
 
     // To achieve the seamless "light radiating" effect, we will use a full-screen overlay.
     const containerRef = useRef(null);
+
+    // Effect to update Global Theme (Navbar visibility)
+    useEffect(() => {
+        if (isLampProduct) {
+            if (isLampOn) {
+                setTextColor('text-black');
+                setLogoColor('text-black');
+            } else {
+                setTextColor('text-white');
+                setLogoColor('text-white');
+            }
+        } else {
+            // Default reset for other products
+            setTextColor('text-black');
+            setLogoColor('text-black');
+        }
+
+        // Cleanup: Reset to default when leaving page
+        return () => {
+            setTextColor('text-black');
+            setLogoColor('text-black');
+        };
+    }, [isLampProduct, isLampOn, setTextColor, setLogoColor]);
 
     if (!product) return <div className="h-screen flex items-center justify-center font-serif text-2xl text-reveal">Product not found.</div>;
 
@@ -45,16 +70,16 @@ const ProductDetails = ({ addToCart }) => {
     };
 
     return (
-        <section className={`pt-40 pb-32 min-h-screen transition-colors duration-[1500ms] ease-in-out relative overflow-hidden ${isLampProduct && !isLampOn ? 'bg-[#121212] text-white/90' : 'bg-[#FAF9F6] text-black'}`}>
+    return (
+        <section className={`pt-40 pb-32 min-h-screen relative overflow-hidden transition-colors duration-[1500ms] ${isLampProduct && !isLampOn ? 'bg-[#121212] text-white/90' : 'bg-[#121212] text-black'}`}>
 
-            {/* Immersive Light Radiation Effect */}
+            {/* The Light Ray Layer (White Background revealed via Clip Path) */}
             {isLampProduct && (
                 <div
-                    className="absolute inset-0 pointer-events-none transition-opacity duration-[1500ms] ease-in-out"
+                    className="absolute inset-0 pointer-events-none bg-[#FAF9F6] z-0"
                     style={{
-                        opacity: isLampOn ? 1 : 0,
-                        background: 'radial-gradient(circle at 30% 50%, rgba(255, 250, 240, 0.8) 0%, rgba(250, 249, 246, 0) 70%)',
-                        zIndex: 0
+                        clipPath: isLampOn ? 'circle(150% at 20% 50%)' : 'circle(0% at 20% 50%)',
+                        transition: 'clip-path 1.5s ease-in-out'
                     }}
                 />
             )}

@@ -6,6 +6,7 @@ import ProductDetails from './components/ProductDetails'
 import Footer from './components/Footer'
 import CartSidebar from './components/CartSidebar'
 import ScrollToTop from './components/ScrollToTop'
+import { ThemeProvider } from './context/ThemeContext'
 
 function App() {
   const [cartCount, setCartCount] = useState(0);
@@ -17,24 +18,26 @@ function App() {
   };
 
   return (
-    <Router>
-      <ScrollToTop />
-      <div className="app-container min-h-screen bg-[#FAF9F6]">
-        <Navbar cartCount={cartCount} onOpenCart={() => setIsCartOpen(true)} />
-        <main>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/product/:id" element={<ProductDetails addToCart={addToCart} />} />
-          </Routes>
-        </main>
-        <Footer />
-        <CartSidebar
-          isOpen={isCartOpen}
-          onClose={() => setIsCartOpen(false)}
-          cartCount={cartCount}
-        />
-      </div>
-    </Router>
+    <ThemeProvider>
+      <Router>
+        <ScrollToTop />
+        <div className="app-container min-h-screen">
+          <Navbar cartCount={cartCount} onOpenCart={() => setIsCartOpen(true)} />
+          <main>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/product/:id" element={<ProductDetails addToCart={addToCart} />} />
+            </Routes>
+          </main>
+          <Footer />
+          <CartSidebar
+            isOpen={isCartOpen}
+            onClose={() => setIsCartOpen(false)}
+            cartCount={cartCount}
+          />
+        </div>
+      </Router>
+    </ThemeProvider>
   )
 }
 

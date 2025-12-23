@@ -94,13 +94,14 @@ const ProductDetails = ({ addToCart }) => {
                             height: '10vh',
                             borderRadius: '50%',
                             // Complex mask: Radial for softness + Conic for "rays" / uneven edges
-                            maskImage: 'radial-gradient(circle, black 0%, transparent 80%), conic-gradient(from 0deg, black 0deg, transparent 10deg, black 20deg, transparent 30deg, black 40deg, transparent 50deg, black 60deg, transparent 70deg, black 80deg, transparent 90deg, black 100deg, transparent 110deg, black 120deg, transparent 130deg, black 140deg, transparent 150deg, black 160deg, transparent 170deg, black 180deg, transparent 190deg, black 200deg, transparent 210deg, black 220deg, transparent 230deg, black 240deg, transparent 250deg, black 260deg, transparent 270deg, black 280deg, transparent 290deg, black 300deg, transparent 310deg, black 320deg, transparent 330deg, black 340deg, transparent 350deg)',
+                            // Simplified rays for a softer, less "spikey" look
+                            maskImage: 'radial-gradient(circle, black 20%, transparent 80%), conic-gradient(from 0deg, black 0deg, transparent 20deg, black 40deg, transparent 60deg, black 80deg, transparent 100deg, black 120deg, transparent 140deg, black 160deg, transparent 180deg, black 200deg, transparent 220deg, black 240deg, transparent 260deg, black 280deg, transparent 300deg, black 320deg, transparent 340deg)',
                             maskComposite: 'intersect',
-                            WebkitMaskImage: 'radial-gradient(circle, black 30%, transparent 80%), conic-gradient(from 45deg, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 10%, rgba(0,0,0,1) 20%)',
+                            WebkitMaskImage: 'radial-gradient(circle, black 20%, transparent 80%), conic-gradient(from 0deg, rgba(0,0,0,1) 0deg, rgba(0,0,0,0.8) 10%, rgba(0,0,0,0) 25%, rgba(0,0,0,0.9) 40%, rgba(0,0,0,0) 55%, rgba(0,0,0,1) 70%)',
                             WebkitMaskComposite: 'source-in', // Use composite to blend the softness with the rays
                             marginTop: '-5vh',
                             marginLeft: '-5vh',
-                            filter: 'blur(20px)' // deeply blur the rays so they look volumetric, not sharp
+                            filter: 'blur(60px)' // deeply blur the rays so they look volumetric, not sharp
                         }}
                     />
                 )}

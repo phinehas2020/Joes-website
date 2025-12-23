@@ -73,16 +73,35 @@ const ProductDetails = ({ addToCart }) => {
 
         <section className={`pt-40 pb-32 min-h-screen relative overflow-hidden transition-colors duration-[1500ms] ${isLampProduct && !isLampOn ? 'bg-[#121212] text-white/90' : 'bg-[#121212] text-black'}`}>
 
-            {/* The Light Ray Layer (White Background revealed via Clip Path) */}
-            {isLampProduct && (
-                <div
-                    className="absolute inset-0 pointer-events-none bg-[#FAF9F6] z-0"
-                    style={{
-                        clipPath: isLampOn ? 'circle(150% at 20% 50%)' : 'circle(0% at 20% 50%)',
-                        transition: 'clip-path 1.5s ease-in-out'
-                    }}
-                />
-            )}
+            {/* The Light Ray Layer (Volumetric Soft Burst) */}
+            <AnimatePresence>
+                {isLampProduct && (
+                    <motion.div
+                        initial={{ opacity: 0, scale: 0 }}
+                        animate={{
+                            opacity: isLampOn ? 1 : 0,
+                            scale: isLampOn ? 40 : 0
+                        }}
+                        transition={{
+                            duration: 1.5,
+                            ease: [0.22, 1, 0.36, 1] // Custom ease for smooth "burst" feel
+                        }}
+                        className="absolute z-0 pointer-events-none bg-[#FAF9F6]"
+                        style={{
+                            top: '50%',
+                            left: '20%',
+                            width: '10vh', // Start small relative to screen
+                            height: '10vh',
+                            borderRadius: '50%',
+                            // Soft edge mask to make it look like light, not a solid circle
+                            maskImage: 'radial-gradient(circle, black 30%, transparent 70%)',
+                            WebkitMaskImage: 'radial-gradient(circle, black 30%, transparent 70%)',
+                            marginTop: '-5vh', // Centering adjustments
+                            marginLeft: '-5vh'
+                        }}
+                    />
+                )}
+            </AnimatePresence>
 
             <div className="container relative z-10">
                 <motion.div

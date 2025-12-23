@@ -70,7 +70,7 @@ const ProductDetails = ({ addToCart }) => {
     };
 
     return (
-    return (
+
         <section className={`pt-40 pb-32 min-h-screen relative overflow-hidden transition-colors duration-[1500ms] ${isLampProduct && !isLampOn ? 'bg-[#121212] text-white/90' : 'bg-[#121212] text-black'}`}>
 
             {/* The Light Ray Layer (White Background revealed via Clip Path) */}

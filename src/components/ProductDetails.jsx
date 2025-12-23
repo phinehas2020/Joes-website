@@ -56,15 +56,25 @@ const ProductDetails = ({ addToCart }) => {
                             onMouseMove={handleMouseMove}
                             onMouseEnter={() => setIsHovering(true)}
                             onMouseLeave={() => setIsHovering(false)}
-                            className="relative aspect-[4/5] bg-white overflow-hidden cursor-none shadow-2xl"
+                            className="relative aspect-square bg-white overflow-hidden cursor-none shadow-2xl"
                         >
-                            {/* Main Image */}
+                            {/* Main Image Base Layer */}
                             <img
-                                src={(product.imageOn && activeImg === 0 && isLampOn) ? product.imageOn : product.gallery[activeImg]}
+                                src={product.gallery[activeImg]}
                                 alt={product.name}
-                                className="w-full h-full object-cover transition-transform duration-1000"
+                                className="absolute inset-0 w-full h-full object-cover transition-transform duration-[1200ms]"
                                 style={{ transform: isHovering ? 'scale(1.02)' : 'scale(1)' }}
                             />
+
+                            {/* Lamp ON Layer (Smooth Fade) */}
+                            {product.imageOn && activeImg === 0 && (
+                                <img
+                                    src={product.imageOn}
+                                    alt={`${product.name} Lit`}
+                                    className={`absolute inset-0 w-full h-full object-cover transition-all duration-[1500ms] ease-in-out pointer-events-none ${isLampOn ? 'opacity-100' : 'opacity-0'}`}
+                                    style={{ transform: isHovering ? 'scale(1.02)' : 'scale(1)' }}
+                                />
+                            )}
 
                             {/* Light Switch for Lamp Product (Only on primary image) */}
                             {product.imageOn && activeImg === 0 && (

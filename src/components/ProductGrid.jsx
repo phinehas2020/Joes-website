@@ -46,7 +46,7 @@ const ProductCard = ({ product, index }) => {
             }}
         >
             <Link to={`/product/${product.id}`}>
-                <div className="relative aspect-[4/5] overflow-hidden bg-[#F3F3F3] mb-8 group cursor-none">
+                <div className="relative aspect-square overflow-hidden bg-[#F3F3F3] mb-8 group cursor-none">
                     {/* Original Image */}
                     <motion.img
                         src={product.image}
@@ -54,7 +54,7 @@ const ProductCard = ({ product, index }) => {
                         style={{
                             transform: "translateZ(50px)",
                         }}
-                        className="w-full h-full object-cover transition-all duration-700 group-hover:scale-110 group-hover:opacity-0"
+                        className="w-full h-full object-cover transition-all duration-[1200ms] ease-in-out group-hover:scale-110 group-hover:opacity-0"
                     />
 
                     {/* Overlay Image (Sketch or On State) */}
@@ -65,7 +65,7 @@ const ProductCard = ({ product, index }) => {
                             style={{
                                 transform: "translateZ(75px)",
                             }}
-                            className="absolute inset-0 w-full h-full object-cover opacity-0 group-hover:opacity-100 transition-all duration-700 pointer-events-none scale-110"
+                            className="absolute inset-0 w-full h-full object-cover opacity-0 group-hover:opacity-100 transition-all duration-[1200ms] ease-in-out pointer-events-none scale-110"
                         />
                     )}
 

@@ -89,6 +89,7 @@ const Hero = () => {
                     initial={{ opacity: 0, y: 30 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 1.5, duration: 1 }}
+                    className="mb-32 relative z-30"
                 >
                     <a href="#collections" className="btn border-white/40 text-white hover:bg-white hover:text-black transition-all duration-500 backdrop-blur-sm">
                         Explore Collection
@@ -100,7 +101,7 @@ const Hero = () => {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 2.5, duration: 1 }}
-                className="absolute bottom-10 left-1/2 -translate-x-1/2 text-white/40 flex flex-col items-center gap-4"
+                className="absolute bottom-10 left-1/2 -translate-x-1/2 text-white/40 flex flex-col items-center gap-4 z-20"
             >
                 <span className="text-[10px] uppercase tracking-[0.5em]">Scroll to Discover</span>
                 <div className="w-[1px] h-16 bg-white/20 relative overflow-hidden">

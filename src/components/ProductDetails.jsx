@@ -12,6 +12,17 @@ const ProductDetails = ({ addToCart }) => {
     const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
     const [isHovering, setIsHovering] = useState(false);
     const [isLampOn, setIsLampOn] = useState(false);
+
+    // Check if this is the special lamp product to enable the global effect
+    const isLampProduct = product?.id === 'luminous-lamp';
+
+    // Default theme (Light Mode) vs Dark Mode (Lamp OFF)
+    // The user requested: Lamp OFF = Dark Mode. Lamp ON = Light Mode (Radiating Light).
+    // So if isLampProduct is true:
+    //   - isLampOn = true -> Light Background (Light is On)
+    //   - isLampOn = false -> Dark Background (Light is Off)
+
+    // To achieve the seamless "light radiating" effect, we will use a full-screen overlay.
     const containerRef = useRef(null);
 
     if (!product) return <div className="h-screen flex items-center justify-center font-serif text-2xl text-reveal">Product not found.</div>;
@@ -34,14 +45,27 @@ const ProductDetails = ({ addToCart }) => {
     };
 
     return (
-        <section className="pt-40 pb-32 bg-primary min-h-screen">
-            <div className="container">
+        <section className={`pt-40 pb-32 min-h-screen transition-colors duration-[1500ms] ease-in-out relative overflow-hidden ${isLampProduct && !isLampOn ? 'bg-[#121212] text-white/90' : 'bg-[#FAF9F6] text-black'}`}>
+
+            {/* Immersive Light Radiation Effect */}
+            {isLampProduct && (
+                <div
+                    className="absolute inset-0 pointer-events-none transition-opacity duration-[1500ms] ease-in-out"
+                    style={{
+                        opacity: isLampOn ? 1 : 0,
+                        background: 'radial-gradient(circle at 30% 50%, rgba(255, 250, 240, 0.8) 0%, rgba(250, 249, 246, 0) 70%)',
+                        zIndex: 0
+                    }}
+                />
+            )}
+
+            <div className="container relative z-10">
                 <motion.div
                     initial={{ opacity: 0, x: -10 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ duration: 0.8 }}
                 >
-                    <Link to="/" className="inline-flex items-center gap-3 text-[10px] uppercase tracking-[0.3em] font-bold mb-16 hover:text-accent transition-colors group">
+                    <Link to="/" className={`inline-flex items-center gap-3 text-[10px] uppercase tracking-[0.3em] font-bold mb-16 hover:text-accent transition-colors group ${isLampProduct && !isLampOn ? 'text-white/60' : 'text-black/60'}`}>
                         <ArrowLeft size={14} className="group-hover:-translate-x-1 transition-transform" /> Back to Collection
                     </Link>
                 </motion.div>
@@ -169,7 +193,7 @@ const ProductDetails = ({ addToCart }) => {
                             </motion.h1>
                             <motion.p
                                 custom={3} variants={fadeIn} initial="hidden" animate="visible"
-                                className="text-3xl font-light text-secondary/80"
+                                className={`text-3xl font-light ${isLampProduct && !isLampOn ? 'text-white/80' : 'text-secondary/80'}`}
                             >
                                 {product.price}
                             </motion.p>
@@ -178,7 +202,7 @@ const ProductDetails = ({ addToCart }) => {
                         <div className="mb-16">
                             <motion.p
                                 custom={4} variants={fadeIn} initial="hidden" animate="visible"
-                                className="text-secondary/70 leading-relaxed mb-10 text-xl font-light"
+                                className={`leading-relaxed mb-10 text-xl font-light transition-colors duration-1000 ${isLampProduct && !isLampOn ? 'text-white/60' : 'text-secondary/70'}`}
                             >
                                 {product.description}
                             </motion.p>
@@ -190,7 +214,7 @@ const ProductDetails = ({ addToCart }) => {
                                 <h4 className="flex items-center gap-3 text-[10px] uppercase tracking-[0.4em] font-black opacity-40">
                                     <Info size={12} /> Details & Materials
                                 </h4>
-                                <ul className="grid grid-cols-1 gap-y-3 text-sm text-secondary/80">
+                                <ul className={`grid grid-cols-1 gap-y-3 text-sm transition-colors duration-1000 ${isLampProduct && !isLampOn ? 'text-white/60' : 'text-secondary/80'}`}>
                                     {product.features.map((f, i) => (
                                         <li key={i} className="flex items-center gap-3">
                                             <div className="w-1.5 h-1.5 border border-accent rounded-full" /> {f}

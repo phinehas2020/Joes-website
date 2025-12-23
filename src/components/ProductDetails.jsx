@@ -56,7 +56,7 @@ const ProductDetails = ({ addToCart }) => {
                             onMouseMove={handleMouseMove}
                             onMouseEnter={() => setIsHovering(true)}
                             onMouseLeave={() => setIsHovering(false)}
-                            className="relative aspect-square bg-white overflow-hidden cursor-none shadow-2xl"
+                            className="relative aspect-video bg-white overflow-hidden cursor-none shadow-2xl"
                         >
                             {/* Main Image Base Layer */}
                             <img

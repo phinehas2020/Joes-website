@@ -46,7 +46,7 @@ const ProductCard = ({ product, index }) => {
             }}
         >
             <Link to={`/product/${product.id}`}>
-                <div className="relative aspect-square overflow-hidden bg-[#F3F3F3] mb-8 group cursor-none">
+                <div className="relative aspect-video overflow-hidden bg-[#F3F3F3] mb-8 group cursor-none">
                     {/* Original Image */}
                     <motion.img
                         src={product.image}

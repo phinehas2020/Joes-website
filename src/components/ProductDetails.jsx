@@ -86,18 +86,21 @@ const ProductDetails = ({ addToCart }) => {
                             duration: 1.5,
                             ease: [0.22, 1, 0.36, 1] // Custom ease for smooth "burst" feel
                         }}
-                        className="absolute z-0 pointer-events-none bg-[#FAF9F6]"
+                        className="absolute z-0 pointer-events-none bg-[#FFFAF0]" // Warmer, yellowish light
                         style={{
                             top: '50%',
                             left: '20%',
-                            width: '10vh', // Start small relative to screen
+                            width: '10vh',
                             height: '10vh',
                             borderRadius: '50%',
-                            // Soft edge mask to make it look like light, not a solid circle
-                            maskImage: 'radial-gradient(circle, black 30%, transparent 70%)',
-                            WebkitMaskImage: 'radial-gradient(circle, black 30%, transparent 70%)',
-                            marginTop: '-5vh', // Centering adjustments
-                            marginLeft: '-5vh'
+                            // Complex mask: Radial for softness + Conic for "rays" / uneven edges
+                            maskImage: 'radial-gradient(circle, black 0%, transparent 80%), conic-gradient(from 0deg, black 0deg, transparent 10deg, black 20deg, transparent 30deg, black 40deg, transparent 50deg, black 60deg, transparent 70deg, black 80deg, transparent 90deg, black 100deg, transparent 110deg, black 120deg, transparent 130deg, black 140deg, transparent 150deg, black 160deg, transparent 170deg, black 180deg, transparent 190deg, black 200deg, transparent 210deg, black 220deg, transparent 230deg, black 240deg, transparent 250deg, black 260deg, transparent 270deg, black 280deg, transparent 290deg, black 300deg, transparent 310deg, black 320deg, transparent 330deg, black 340deg, transparent 350deg)',
+                            maskComposite: 'intersect',
+                            WebkitMaskImage: 'radial-gradient(circle, black 30%, transparent 80%), conic-gradient(from 45deg, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 10%, rgba(0,0,0,1) 20%)',
+                            WebkitMaskComposite: 'source-in', // Use composite to blend the softness with the rays
+                            marginTop: '-5vh',
+                            marginLeft: '-5vh',
+                            filter: 'blur(20px)' // deeply blur the rays so they look volumetric, not sharp
                         }}
                     />
                 )}

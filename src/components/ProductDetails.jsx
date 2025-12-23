@@ -3,6 +3,7 @@ import { useParams, Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { products } from '../data/products';
 import { ArrowLeft, Plus, Minus, Share2, Info } from 'lucide-react';
+import { playClickSound } from '../utils/sound';
 
 const ProductDetails = ({ addToCart }) => {
     const { id } = useParams();
@@ -79,7 +80,10 @@ const ProductDetails = ({ addToCart }) => {
                             {/* Light Switch for Lamp Product (Only on primary image) */}
                             {product.imageOn && activeImg === 0 && (
                                 <button
-                                    onClick={() => setIsLampOn(!isLampOn)}
+                                    onClick={() => {
+                                        setIsLampOn(!isLampOn);
+                                        playClickSound();
+                                    }}
                                     className="absolute top-8 right-8 z-30 group"
                                     aria-label="Toggle Light"
                                 >

@@ -31,9 +31,7 @@ const ProductCard = ({ product, index }) => {
         y.set(0);
     };
 
-    // Check if product is new (for badge)
-    const isNew = index < 2;
-    const isLimited = product.category === "Reclaimed Wood";
+
 
     return (
         <motion.div
@@ -53,17 +51,7 @@ const ProductCard = ({ product, index }) => {
         >
             <Link to={`/product/${product.id}`}>
                 <div className="relative aspect-video overflow-hidden bg-[#F3F3F3] mb-8 group cursor-none rounded-sm shadow-luxury hover:shadow-luxury-lg transition-shadow duration-500">
-                    {/* Badge */}
-                    {(isNew || isLimited) && (
-                        <motion.div
-                            initial={{ scale: 0, rotate: -12 }}
-                            animate={{ scale: 1, rotate: -12 }}
-                            transition={{ delay: index * 0.1 + 0.5, type: "spring", stiffness: 200 }}
-                            className="absolute top-4 right-4 z-40 px-3 py-1 text-[9px] uppercase tracking-widest font-black badge-glow text-white rounded-full"
-                        >
-                            {isNew ? "New" : "Limited"}
-                        </motion.div>
-                    )}
+
 
                     {/* Glow Border Effect */}
                     <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-20 pointer-events-none">
@@ -100,7 +88,7 @@ const ProductCard = ({ product, index }) => {
                         className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-30"
                         style={{ transform: "translateZ(100px)" }}
                     >
-                        <motion.div 
+                        <motion.div
                             className="w-24 h-24 bg-white/90 backdrop-blur-md rounded-full flex items-center justify-center text-[10px] uppercase tracking-widest font-bold text-black border border-black/10 shadow-2xl"
                             initial={{ scale: 0 }}
                             whileHover={{ scale: 1.1 }}

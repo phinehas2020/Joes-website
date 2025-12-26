@@ -6,7 +6,21 @@ import ProductDetails from './components/ProductDetails'
 import Footer from './components/Footer'
 import CartSidebar from './components/CartSidebar'
 import ScrollToTop from './components/ScrollToTop'
-import { ThemeProvider } from './context/ThemeContext'
+import CustomCursor from './components/CustomCursor'
+import ScrollProgress from './components/ScrollProgress'
+import { ThemeProvider, useTheme } from './context/ThemeContext' // Added useTheme
+
+const ThemeWrapper = ({ children }) => {
+  const { backgroundColor } = useTheme();
+  return (
+    <div
+      className="app-container min-h-screen transition-colors duration-[1500ms] ease-in-out" // Added transition
+      style={{ backgroundColor }}
+    >
+      {children}
+    </div>
+  );
+};
 
 function App() {
   const [cartCount, setCartCount] = useState(0);
@@ -21,7 +35,9 @@ function App() {
     <ThemeProvider>
       <Router>
         <ScrollToTop />
-        <div className="app-container min-h-screen">
+        <CustomCursor />
+        <ScrollProgress />
+        <ThemeWrapper>
           <Navbar cartCount={cartCount} onOpenCart={() => setIsCartOpen(true)} />
           <main>
             <Routes>
@@ -35,7 +51,7 @@ function App() {
             onClose={() => setIsCartOpen(false)}
             cartCount={cartCount}
           />
-        </div>
+        </ThemeWrapper>
       </Router>
     </ThemeProvider>
   )

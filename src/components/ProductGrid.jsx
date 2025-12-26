@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { products } from '../data/products';
 
 const ProductCard = ({ product, index }) => {
+    const cardRef = useRef(null);
     const x = useMotionValue(0);
     const y = useMotionValue(0);
 
@@ -30,13 +31,18 @@ const ProductCard = ({ product, index }) => {
         y.set(0);
     };
 
+    // Check if product is new (for badge)
+    const isNew = index < 2;
+    const isLimited = product.category === "Reclaimed Wood";
+
     return (
         <motion.div
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
+            ref={cardRef}
+            initial={{ opacity: 0, y: 50, filter: "blur(10px)" }}
+            whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+            viewport={{ once: true, margin: "-100px" }}
             transition={{ delay: index * 0.1, duration: 1, ease: [0.22, 1, 0.36, 1] }}
-            className="group"
+            className="group relative"
             onMouseMove={handleMouseMove}
             onMouseLeave={handleMouseLeave}
             style={{
@@ -46,7 +52,24 @@ const ProductCard = ({ product, index }) => {
             }}
         >
             <Link to={`/product/${product.id}`}>
-                <div className="relative aspect-video overflow-hidden bg-[#F3F3F3] mb-8 group cursor-none">
+                <div className="relative aspect-video overflow-hidden bg-[#F3F3F3] mb-8 group cursor-none rounded-sm shadow-luxury hover:shadow-luxury-lg transition-shadow duration-500">
+                    {/* Badge */}
+                    {(isNew || isLimited) && (
+                        <motion.div
+                            initial={{ scale: 0, rotate: -12 }}
+                            animate={{ scale: 1, rotate: -12 }}
+                            transition={{ delay: index * 0.1 + 0.5, type: "spring", stiffness: 200 }}
+                            className="absolute top-4 right-4 z-40 px-3 py-1 text-[9px] uppercase tracking-widest font-black badge-glow text-white rounded-full"
+                        >
+                            {isNew ? "New" : "Limited"}
+                        </motion.div>
+                    )}
+
+                    {/* Glow Border Effect */}
+                    <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-20 pointer-events-none">
+                        <div className="absolute inset-0 border-2 border-accent/30 rounded-sm" />
+                    </div>
+
                     {/* Original Image */}
                     <motion.img
                         src={product.image}
@@ -69,24 +92,47 @@ const ProductCard = ({ product, index }) => {
                         />
                     )}
 
-                    <div className="absolute inset-0 bg-black/0 group-hover:bg-black/5 transition-colors duration-500 z-10" />
+                    {/* Gradient Overlay */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10" />
 
+                    {/* View Button */}
                     <div
                         className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-30"
                         style={{ transform: "translateZ(100px)" }}
                     >
-                        <div className="w-24 h-24 bg-white/90 backdrop-blur-md rounded-full flex items-center justify-center text-[10px] uppercase tracking-widest font-bold text-black border border-black/10 shadow-2xl scale-0 group-hover:scale-100 transition-transform duration-500 ease-out">
-                            View
-                        </div>
+                        <motion.div 
+                            className="w-24 h-24 bg-white/90 backdrop-blur-md rounded-full flex items-center justify-center text-[10px] uppercase tracking-widest font-bold text-black border border-black/10 shadow-2xl"
+                            initial={{ scale: 0 }}
+                            whileHover={{ scale: 1.1 }}
+                            animate={{ scale: 0 }}
+                            transition={{ duration: 0.5, ease: "backOut" }}
+                            style={{ scale: 0 }}
+                        >
+                            <motion.span
+                                className="group-hover:scale-100"
+                                initial={{ scale: 0 }}
+                                animate={{ scale: 0 }}
+                                transition={{ delay: 0.1 }}
+                            >
+                                View
+                            </motion.span>
+                        </motion.div>
                     </div>
+
+                    {/* Shimmer Effect on Hover */}
+                    <motion.div
+                        className="absolute inset-0 bg-shimmer opacity-0 group-hover:opacity-100 pointer-events-none z-20"
+                        animate={{ backgroundPosition: ["0% 0%", "200% 0%"] }}
+                        transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
+                    />
                 </div>
             </Link>
             <div className="flex justify-between items-start pt-2">
                 <div>
-                    <p className="text-[10px] uppercase tracking-[0.3em] text-secondary mb-2 opacity-60">{product.category}</p>
-                    <h3 className="text-2xl font-serif tracking-tight">{product.name}</h3>
+                    <p className="text-[10px] uppercase tracking-[0.3em] text-secondary mb-2 opacity-60 group-hover:opacity-100 transition-opacity">{product.category}</p>
+                    <h3 className="text-2xl font-serif tracking-tight group-hover:text-accent transition-colors duration-300">{product.name}</h3>
                 </div>
-                <p className="font-sans text-sm font-medium opacity-80">{product.price}</p>
+                <p className="font-sans text-sm font-medium opacity-80 group-hover:opacity-100 transition-opacity">{product.price}</p>
             </div>
         </motion.div>
     );

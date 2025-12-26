@@ -9,7 +9,7 @@ import { useTheme } from '../context/ThemeContext';
 const ProductDetails = ({ addToCart }) => {
     const { id } = useParams();
     const product = products.find(p => p.id === id);
-    const { setTextColor, setLogoColor } = useTheme();
+    const { setTextColor, setLogoColor, setBackgroundColor } = useTheme();
     const [activeImg, setActiveImg] = useState(0);
     const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
     const [isHovering, setIsHovering] = useState(false);
@@ -27,28 +27,32 @@ const ProductDetails = ({ addToCart }) => {
     // To achieve the seamless "light radiating" effect, we will use a full-screen overlay.
     const containerRef = useRef(null);
 
-    // Effect to update Global Theme (Navbar visibility)
+    // Effect to update Global Theme (Navbar visibility & Body Background)
     useEffect(() => {
         if (isLampProduct) {
             if (isLampOn) {
                 setTextColor('text-black');
                 setLogoColor('text-black');
+                setBackgroundColor('#FFFAF0'); // Warm Light
             } else {
                 setTextColor('text-white');
                 setLogoColor('text-white');
+                setBackgroundColor('#121212'); // Dark Mode
             }
         } else {
             // Default reset for other products
             setTextColor('text-black');
             setLogoColor('text-black');
+            setBackgroundColor('#FAF9F6');
         }
 
         // Cleanup: Reset to default when leaving page
         return () => {
             setTextColor('text-black');
             setLogoColor('text-black');
+            setBackgroundColor('#FAF9F6');
         };
-    }, [isLampProduct, isLampOn, setTextColor, setLogoColor]);
+    }, [isLampProduct, isLampOn, setTextColor, setLogoColor, setBackgroundColor]);
 
     if (!product) return <div className="h-screen flex items-center justify-center font-serif text-2xl text-reveal">Product not found.</div>;
 
@@ -71,7 +75,9 @@ const ProductDetails = ({ addToCart }) => {
 
     return (
 
-        <section className={`pt-40 pb-32 min-h-screen relative overflow-hidden transition-colors duration-[1500ms] ${isLampProduct && !isLampOn ? 'bg-[#121212] text-white/90' : 'bg-[#121212] text-black'}`}>
+    return (
+
+        <section className={`pt-40 pb-32 min-h-screen relative overflow-hidden ${isLampProduct && !isLampOn ? 'text-white/90' : 'text-black'}`}>
 
             {/* The Light Ray Layer (Volumetric Soft Burst) */}
             <AnimatePresence>

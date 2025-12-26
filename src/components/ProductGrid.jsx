@@ -49,7 +49,7 @@ const ProductCard = ({ product, index }) => {
                 transformStyle: "preserve-3d",
             }}
         >
-            <Link to={`/product/${product.id}`}>
+            <Link to={`/product/${product.id}`} data-cursor="pointer" data-cursor-text="View">
                 <div className="relative aspect-video overflow-hidden bg-[#F3F3F3] mb-8 group cursor-none rounded-sm shadow-luxury hover:shadow-luxury-lg transition-shadow duration-500">
 
 

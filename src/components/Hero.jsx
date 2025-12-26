@@ -164,17 +164,13 @@ const Hero = () => {
                     transition={{ delay: 1.5, duration: 1 }}
                     className="mb-32 relative z-30"
                 >
-                    <a 
-                        href="#collections" 
-                        className="btn border-white/40 text-white backdrop-blur-sm shadow-luxury hover:shadow-luxury-lg group relative overflow-hidden"
+                    <a
+                        href="#collections"
+                        className="inline-block px-12 py-5 border border-white/40 text-white text-sm uppercase tracking-[0.2em] font-medium backdrop-blur-sm hover:bg-white hover:text-black transition-all duration-500"
+                        data-cursor="pointer"
+                        data-cursor-text="Explore"
                     >
-                        <span className="relative z-10">Explore Collection</span>
-                        <motion.div
-                            className="absolute inset-0 bg-white"
-                            initial={{ scale: 0, opacity: 0 }}
-                            whileHover={{ scale: 1, opacity: 1 }}
-                            transition={{ duration: 0.4 }}
-                        />
+                        Explore Collection
                     </a>
                 </motion.div>
             </motion.div>

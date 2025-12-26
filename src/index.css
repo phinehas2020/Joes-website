@@ -27,8 +27,24 @@
   box-sizing: border-box;
 }
 
-html {
-  scroll-behavior: smooth;
+html.lenis, html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+.lenis.lenis-scrolling iframe {
+  pointer-events: none;
 }
 
 /* Custom Smooth Scrollbar */
@@ -67,24 +83,11 @@ body {
   cursor: none;
 }
 
-/* Custom Cursor */
-body::after {
-  content: "";
-  position: fixed;
-  width: var(--cursor-size);
-  height: var(--cursor-size);
-  border: 2px solid var(--accent);
-  border-radius: 50%;
-  pointer-events: none;
-  z-index: 10000;
-  transition: transform 0.15s ease-out, opacity 0.15s ease-out;
-  opacity: 0;
-  transform: translate(-50%, -50%) scale(1);
-  mix-blend-mode: difference;
-}
-
-body.cursor-active::after {
-  opacity: 1;
+/* Hide default cursor globally */
+@media (pointer: fine) {
+  * {
+    cursor: none !important;
+  }
 }
 
 

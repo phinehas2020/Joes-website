@@ -75,8 +75,6 @@ const ProductDetails = ({ addToCart }) => {
 
     return (
 
-    return (
-
         <section className={`pt-40 pb-32 min-h-screen relative overflow-hidden ${isLampProduct && !isLampOn ? 'text-white/90' : 'text-black'}`}>
 
             {/* The Light Ray Layer (Volumetric Soft Burst) */}

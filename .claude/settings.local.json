@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm uninstall:*)",
+      "Bash(npm install:*)",
+      "Bash(npm run build:*)",
+      "Bash(timeout 5 npm run dev:*)",
+      "Bash(git commit -m \"$\\(cat <<''EOF''\nfeat: add Awwwards-level design enhancements\n\n- Add Lenis smooth scroll for buttery scrolling experience\n- Implement page transitions with blur/fade effects\n- Enhance custom cursor with expand states and text labels\n- Add branded preloader with progress animation\n- Create infinite marquee banners for visual rhythm\n- Add magnetic effects to navbar elements\n- Fix hero button styling issue\n\n🤖 Generated with [Claude Code]\\(https://claude.com/claude-code\\)\n\nCo-Authored-By: Claude Opus 4.5 <noreply@anthropic.com>\nEOF\n\\)\")",
+      "Bash(git push:*)"
+    ]
+  }
+}
